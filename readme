@@ -1,0 +1,17 @@
+# 1 import django - *
+# 2 start project  - "django-admin startproject nameproject"
+# 3 create database:
+#   Install Mysql on computer
+#    pip install mysql
+#    pip install mysql-connector
+#    pip install mysql-connector-python
+# 4 in settings.py edit - language settings "uk"
+# 5 python manage.py startapp nameapp
+# 6 connect to database
+# 7 python manage.py migrate
+# 8 python manage.py createsuperuser
+# 9 Check if work manage.py runserver
+#    !!! connect app in settings !!!
+# 10 Create new path in urls.py and create new one in app
+# 11 Create function in views.py
+# Create models for database

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'kikiproject/style.css' %}">
+
+
+{% block content %}
+
+{% if profile %}
+<h1>Hi, {{ profile.user.username }}!</h1>
+<div>
+    <div class="container">
+        <div>
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" class="image" width=50>
+            {% else %}
+                <img src="{% static 'kikiproject/image/default_pic.png' %}">
+            {% endif %}
+        </div>
+
+        <div class="items">
+
+            {% if projects|length > 0 %}
+            {% for project in projects %}
+            <a href="{% url 'project' project.id %}" class="card">
+                <div class="image">
+                    <img src="{{ project.project_image.url }}" alt="">
+                </div>
+                <div class="text">
+                    <h3 class="title">{{ project.project_name }}</h3>
+                    {% for tag in project.tags.all %}
+
+                    <small>{{ tag }}</small>
+
+                    {% endfor %}
+                    <div class="description">
+                        <p>Created by: @{{ project.user.username }}</p>
+                    </div>
+                    <div class="date">
+                        <span>{{ project.created_at }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<strong>Follows</strong><br/>
+{% for following in profile.follows.all %}
+<a href="{% url 'profile' following.user.id %}">
+    @{{ following }}</a><br/>
+{% endfor %}
+<br/><br/>
+<strong>Followed By</strong><br/>
+{% for following in profile.followed_by.all %}
+
+<a href="{% url 'profile' following.user.id %}">
+    @{{ following }}
+</a><br/>
+
+{% endfor %}
+
+{% if request.user.id == profile.user.id %}
+<a href="{% url 'update_profile'  %}" class="button btn-sz01">Update profile</a>
+{% endif %}
+{% endif %}
+
+
+{% endblock %}

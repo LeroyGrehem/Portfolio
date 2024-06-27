@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crows and Owls</title>
+</head>
+<body>
+{% load static %}
+<link rel="stylesheet" href="{% static 'kikiproject/style.css' %}">
+
+
+{% include 'navbar.html' %}
+<!--{% include 'alert.html' %}-->
+<main>
+    <div class="one-screen">
+
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,361 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img{
+    display: block;
+    width: 100%;
+    max-width: 150px;
+
+}
+
+/* ---- Layout ----*/
+html{
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(57deg, #504444, #624343);
+    color: #ffffff;
+
+    scrollbar-color: #935E5E #504444;
+    scrollbar-width: thin;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    flex: 1;
+}
+
+.one-screen{
+    height: calc(100vh - 157px);
+    overflow-y: auto;
+}
+.container{
+    max-width: 1340px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+.layout{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+/*---- UI ----*/
+h1{
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-align: center;
+}
+h3{
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+}
+p{
+
+}
+.button{
+    display: inline-block;
+    background: #B17B7B82;
+    border: 4px solid #D28282;
+    border-radius: 20px;
+    padding: 8px 34px;
+
+    text-decoration: none;
+    color: #E3A7A7;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+
+    transition: 0.3s;
+}
+.button:hover{
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+.btn-sz01{
+    min-width: 180px;
+}
+.spacer{
+    height: 80px;
+}
+
+/*---- Header ----*/
+header{
+    position: relative;
+    z-index: 10;
+    height: 72px;
+    background: linear-gradient(to right, #4E4D4D, #935E5E);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.user-info{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 140px;
+    height: 100%;
+
+    font-size: 20px;
+    line-height: 1;
+    color: #FBFBFB;
+    text-decoration: none;
+}
+.user-info .image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+    width: 30px;
+}
+.user-info .image:hover{
+    transform: scale(1.05);
+}
+.controls{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+.logo{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/*---- Footer ----*/
+footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 15px 20px;
+    height: 85px;
+    background: linear-gradient(-93deg, #443737, #5F5555);
+}
+
+/*---- Form ----*/
+form .row{
+    margin-bottom: 20px;
+}
+form input,
+form textarea{
+    display: block;
+    outline: none;
+    background: rgba(177,123,123, 0.04);
+    height: 48px;
+    width: 100%;
+    padding: 8px 20px;
+    border: 4px solid #AF8888;
+    border-radius: 20px;
+
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+
+    transition: 0.3s;
+}
+form textarea{
+    height: 220px;
+    resize: none;
+}
+form input::placeholder,
+form textarea::placeholder{
+    color: #AF8888;
+}
+form input:active,
+form textarea:active,
+form input:focus,
+form textarea:focus{
+    border-color: #D28282;
+}
+
+.file-input{
+    position: relative;
+}
+.file-input input{
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: absolute;
+    z-index: -100;
+}
+.file-input label{
+    display: block;
+    cursor: pointer;
+    transition: 0.2s;
+    max-width: 300px;
+}
+.file-input label:hover{
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+.file-label{
+    position: absolute;
+    top: 110%;
+    left: 0;
+    display: block;
+    animation: fade-in 1s;
+}
+
+
+
+/* ================== Unique elements ================*/
+.items{
+    padding: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.card{
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+
+    text-decoration: none;
+    color: #ffffff;
+}
+.card .text{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #EB919157, #584F4F);
+}
+.card .text .description{
+    font-size: 14px;
+    line-height: 20px;
+
+    opacity: 0;
+    height: 0;
+
+    overflow: hidden;
+    max-height: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    transition: height .5s, opacity 0.2s;
+}
+.card .text .description p{
+    opacity: 0.8;
+}
+.card .text h3{
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 500;
+}
+.card .text .date{
+    font-size: 12px;
+    line-height: 18px;
+    opacity: 0.8;
+}
+.card:hover .text .description{
+    height: 40px;
+    opacity: 1;
+    transition: height .2s, opacity 0.5s;
+}
+
+
+.layout.project{
+    gap: 50px;
+    grid-template-columns: 600px 1fr;
+    padding: 90px 0;
+}
+.project .image{
+    border-radius: 20px;
+    overflow: hidden;
+}
+.project .text .item{
+    margin-bottom: 20px;
+}
+.project .text .item h3{
+    margin-bottom: 10px;
+}
+.project .text .item p{
+    opacity: 0.8;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login h1{
+    margin-bottom: 50px;
+}
+.login form{
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+}
+.login form input{
+    text-align: center;
+}
+.login .btn-holder{
+    padding: 30px 50px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form{
+    padding: 70px 0 0;
+}
+.form h1{
+    margin-bottom: 60px;
+}
+.form .layout{
+    grid-template-columns: 2fr 3fr;
+    gap: 50px;
+}
+.file-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-column .btn-holder{
+    padding-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.image-container {
+    width: 50%; /* Adjust the width as needed, can also use vw or vh units */
+    max-width: 50px; /* Optional: Set a max-width */
+    margin: 0 auto; /* Center the container */
+    border-radius: 50%;
+}
+
+.round-image {
+    border-radius: 50%;
+    width: 100%; /* Adjust to the size of the container */
+    max-width: 50px; /* Optional: Set a max-width to prevent it from becoming too large */
+    height: auto; /* Maintains the aspect ratio */
+    object-fit: cover; /* Ensures the image covers the area and maintains aspect ratio */
+}

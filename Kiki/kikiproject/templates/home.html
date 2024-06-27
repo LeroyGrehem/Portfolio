@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'kikiproject/style.css' %}">
+
+
+{% block content %}
+
+{% if user.is_authenticated  %}
+<h1>Hello</h1>
+<div>
+    <div class="container">
+        <div class="items">
+
+            <a href="{% url 'new_project' %}" class="image">
+
+                <img src="{% static 'kikiproject/image/file-picker.png' %}">
+
+            </a>
+
+
+            {% if projects|length > 0 %}
+            {% for project in projects %}
+            <a href="{% url 'project' project.id %}" class="card">
+                <div class="image">
+                    <img src="{{ project.project_image.url }}" alt="">
+                </div>
+                <div class="text">
+                    <h3 class="title">{{ project.project_name }}</h3>
+                    {% for tag in project.tags.all %}
+
+                    <small>{{ tag }}</small>
+
+                    {% endfor %}
+                    <div class="description">
+                        <p>Created by: </p>
+
+                        <div class="image-container">
+                            {% if project.user.userprofile.profile_image %}
+                            <img src="{{ project.user.userprofile.profile_image.url }}" class="round-image" width="50" height="50">
+                            {% else %}
+                            <img src="{% static 'kikiproject/image/default_pic.png' %}" class="round-image" width="50" height="50">
+                            {% endif %}
+                        </div>
+                        @{{ project.user.username }}
+                    </div>
+                    <div class="date">
+                        <span>{{ project.created_at }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% else %}
+
+
+<div class="container">
+    <div class="one-screen login">
+        <h1>Login</h1>
+        <form action="{% url 'home' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="row">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="btn-holder">
+
+                <!--                            <a href="{% url 'register' %}" class="button btn-sz01">Register</a>-->
+                <button type="submit" class="button btn-sz01">Login</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

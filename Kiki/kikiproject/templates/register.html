@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'kikiproject/style.css' %}">
+
+{% block content %}
+
+    <div class="container">
+            <h1>Register</h1>
+            <br/>
+
+            <form method="POST" action="" class="form">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+
+                    <br/>
+                <button type="submit" class="button btn-sz01">Register</button>
+            </form>
+    </div>
+
+{% endblock %}

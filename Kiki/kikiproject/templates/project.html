@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'kikiproject/style.css' %}">
+
+
+{% block content %}
+<div class="one-screen">
+    <div class="container">
+        <div class="layout project">
+            <div class="image">
+                <img src="{{ project.project_image.url }}" alt="">
+            </div>
+            <div class="text">
+                <h1 class="title">{{ project.name_project }}</h1>
+                <div class="item">
+
+
+                </div>
+                <div class="item">
+                    <h3>Description:</h3>
+                    <p>{{ project.descripton }}</p>
+                </div>
+                <div class="item">
+                    <h3>GitHub link:</h3>
+                    <a href="{{ project.git_link }}">{{ project.git_link }}</a>
+                </div>
+                <div class="item">
+                    <h3>Created at:</h3>
+                    <p>{{ project.created_at }}</p>
+                </div>
+                <div class="item">
+                    <h3>Created by:</h3>
+                    <a href="{% url 'profile' project.user.id %}">
+                        <div class="image-container">
+                        {% if project.user.userprofile.profile_image %}
+                        <img src="{{ project.user.userprofile.profile_image.url }}" class="round-image" width=20, height=20>
+                        {% else %}
+                        <img src="{% static 'kikiproject/image/default_pic.png' %}" class="round-image" width=20, height=20>
+                        {% endif %}
+                        </div>>
+                        {{ project.user.username }}</a>
+                </div>
+                <div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

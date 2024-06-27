@@ -1,0 +1,19 @@
+{% if form.errors %}
+    <div class="alert" id="alertBox" style="background-color: #D28282; color: #E3A7A7; opacity: 0.5; height: 50px; width: 100%;">
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}
+                    <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <button class="close-btn" onclick="closeAlert()">×</button>
+    </div>
+{% endif %}
+
+<script>
+    function closeAlert() {
+        var alertBox = document.getElementById('alertBox');
+        alertBox.style.display = 'none';
+    }
+</script>

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm, ProjectForm, Profile, UpdateForm
 from .models import UserProfile, Project
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 # # Create your views here.
 
 
@@ -25,6 +26,24 @@ def home(request):
             return redirect('home')
     else:
         return render(request, 'home.html', {'projects': projects})
+
+
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+#         Authenticate
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print("You Have Been Logged In!")
+            return redirect('home')
+        else:
+            print("There Was An Error Loggin In, Please Try Again...")
+            return redirect('login')
+    else:
+        return render(request, "login.html", {})
 
 
 def users_profile(request, pk):
@@ -122,3 +141,47 @@ def view_project(request, pk):
     else:
         print("That project does not exist...")
         return redirect('home')
+
+
+def edit_project(request, pk):
+    if request.user.is_authenticated:
+        project = get_object_or_404(Project, id=pk)
+
+        # Check if you own the project
+        if request.user.username == project.user.username:
+            form = ProjectForm(request.POST or None, instance=project, required=False)
+            if request.method == "POST":
+                if form.is_valid():
+                    project = form.save(commit=False)
+                    project.user = request.user
+                    project.save()
+                    print("Project has been updated...")
+                    return redirect(reverse('project', args=[project.id]))
+            else:
+                return render(request, "edit_project.html", {'form': form, 'project': project})
+        else:
+            print("You don't own that project")
+            return redirect(reverse('project', args=[project.id]))
+    else:
+        print("Please log in to continue")
+        return redirect('home')
+
+
+def delete_project(request, pk):
+    if request.user.is_authenticated:
+        project = get_object_or_404(Project, id=pk)
+#         Check if you own this project
+        if request.user.username == project.user.username:
+            # Delete project
+            project.delete()
+
+            print("Project has been deleted...")
+            return redirect('home')
+        else:
+            print("You dont own this project")
+            return redirect('home')
+    else:
+        print("You must be logged in to continue...")
+        return redirect('home')
+
+

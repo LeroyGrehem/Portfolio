@@ -8,7 +8,7 @@ from .models import Project, UserProfile
 class ProjectForm(forms.ModelForm):
     name_project = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'input',
                                                                                 'placeholder': 'Project Name: '}))
-    description = forms.CharField(max_length=1000, widget=forms.Textarea(attrs={'class': 'input',
+    descripton = forms.CharField(max_length=1000, widget=forms.Textarea(attrs={'class': 'input',
                                                                                 'placeholder': 'Project Description: '}))
     git_link = forms.CharField(required=False, max_length=200, widget=forms.TextInput(attrs={'class': 'input',
                                                                                              'placeholder': 'GitHub link: '}))
@@ -16,7 +16,7 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ('name_project', 'description', 'git_link', 'project_image', 'tags')
+        fields = ('name_project', 'descripton', 'git_link', 'project_image', 'tags')
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):

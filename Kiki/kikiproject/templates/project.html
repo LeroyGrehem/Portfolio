@@ -43,8 +43,10 @@
                         {{ project.user.username }}</a>
                 </div>
                 <div>
-
-
+                {% if user.is_authenticated %}
+                    <a href="{% url 'edit_project' project.id %}" class="button">Edit Project</a>
+                    <a href="{% url 'delete_project' project.id %}" class="button">Delete project</a>
+                {% endif %}
                 </div>
             </div>
         </div>

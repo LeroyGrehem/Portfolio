@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div>
+    <h1>Add new project</h1>
+    <br/><br/>
+    {% if form %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+
+        <button type="submit" class="button btn-sz01">Save</button>
+    </form>
+
+    {% endif %}
+</div>
+
+
+{% endif %}
+
+{% endblock %}
